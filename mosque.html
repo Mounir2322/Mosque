@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+     
+    <link rel="preconnect" href="https://fonts.googleapis.com"  />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Noto+Naskh+Arabic&display=swap"
+      rel="stylesheet"/>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+      rel="stylesheet"/>
+
+     <!---------------Tailwind CSS within an HTML file using JavaScript.------------------------------->
+     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+     <script>
+       tailwind.config = {
+         theme: {
+           extend: {
+             colors: { primary: "#2563eb", secondary: "#3b82f6" },
+             borderRadius: {
+               none: "0px",
+               sm: "4px",
+               DEFAULT: "8px",
+               md: "12px",
+               lg: "16px",
+               xl: "20px",
+               "2xl": "24px",
+               "3xl": "32px",
+               full: "9999px",
+               button: "8px",
+             },
+           },
+         },
+       };
+     </script>
+
+    <!------------------------------animations, and effects for a webpage.---------------------------->
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      .dark-mode-donate {
+      background: linear-gradient(to right, #1e3a8a, #2563eb) !important;
+      }
+      .button-pulse {
+      animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+      0% {
+      box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+      }
+      70% {
+      box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+      }
+      100% {
+      box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+      }
+      }
+      .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .hover-lift:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .animate-fadeIn {
+      animation: fadeIn 1s ease-in-out;
+      }
+      .animate-slideIn {
+      animation: slideIn 1s ease-in-out;
+      }
+      .animate-scaleIn {
+      animation: scaleIn 0.5s ease-in-out;
+      }
+      @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+      }
+      @keyframes slideIn {
+      from { transform: translateX(-30px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes scaleIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+      }
+      .gradient-text {
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+
+    <!------------------------------NAVBAR-------------------------------------->
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center">
+            <a href="#" class="flex items-center">
+              <img
+                src="https://static.readdy.ai/image/98167994e05178b70ec8b2c416ddcc58/455ee7a231248dd8361f0a2b18ff8d0d.jpeg"
+                alt="Bayridge Muslim Community Center Logo"
+                class="h-16 w-20 rounded-[50%] animate-fadeIn"
+              />
+            </a>
+          </div>
+          <div class="flex items-center">
+            <button
+              class="md:hidden w-10 h-10 flex items-center justify-center text-gray-600"
+              onclick="toggleMobileMenu()"
+            >
+              <i class="ri-menu-line text-2xl"></i>
+            </button>
+            <div
+              id="mobileMenu"
+              class="fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 md:hidden"
+            >
+              <div class="p-4">
+                <div class="flex justify-between items-center mb-8">
+                  <h3 class="text-xl font-semibold">Menu</h3>
+                  <button
+                    onclick="toggleMobileMenu()"
+                    class="w-10 h-10 flex items-center justify-center text-gray-600"
+                  >
+                    <i class="ri-close-line text-2xl"></i>
+                  </button>
+                </div>
+                <div class="flex flex-col space-y-4">
+                  <a
+                    href="#"
+                    onclick="setActiveNav(event, this)"
+                    class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium"
+                    data-section="home"
+                    >Home</a
+                  >
+                  <a
+                    href="#"
+                    onclick="scrollToPrayerTimes(event)"
+                    class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium"
+                    >Prayer Times</a
+                  >
+                  <a
+                    href="#programs"
+                    onclick="setActiveNav(event, this)"
+                    class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium"
+                    data-section="programs"
+                    >Programs</a
+                  >
+                  <a
+                    href="#video-gallery"
+                    onclick="setActiveNav(event, this)"
+                    class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium"
+                    data-section="videos"
+                    >Videos</a
+                  >
+                  <a
+                    href="#"
+                    onclick="setActiveNav(event, this)"
+                    class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium"
+                    data-section="donate"
+                    >Donate</a
+                  >
+                  <a
+                    href="#contact"
+                    onclick="setActiveNav(event, this)"
+                    class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium"
+                    data-section="contact"
+                    >Contact</a
+                  >
+                </div>
+              </div>
+            </div>
+<!--------------------------ToggleMobileMenu---------------------------------------------->
+            <script>
+              function toggleMobileMenu() {
+                const mobileMenu = document.getElementById("mobileMenu");
+                const isOpen = mobileMenu.style.transform === "translateX(0px)";
+                mobileMenu.style.transform = isOpen ? "translateX(100%)" : "translateX(0)";
+                document.body.style.overflow = isOpen ? "" : "hidden";
+              }
+            </script>
+
+            <div class="hidden md:flex items-center space-x-8">
+              <a
+                href="#"
+                onclick="setActiveNav(event, this)"
+                class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium"
+                data-section="home"
+                >Home</a
+              >
+<!------------------------------handling navigation link interactions------------------------------->
+             <script>
+                function setActiveNav(e, element) {
+                  e.preventDefault();
+                  document.querySelectorAll(".nav-link").forEach((link) => {
+                    link.classList.remove("active");
+                    link.style.color = "";
+                  });
+                  element.classList.add("active");
+                  element.style.color = "#2563eb";
+                  if (element.dataset.section === "home") {
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "smooth",
+                    });
+                  } else if (element.dataset.section === "programs") {
+                    document.getElementById("programs").scrollIntoView({ behavior: "smooth" });
+                  } else if (element.dataset.section === "donate") {
+                    document
+                      .getElementById("donate-section")
+                      .scrollIntoView({ behavior: "smooth" });
+                  } else if (element.dataset.section === "contact") {
+                    document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+                  } else if (element.dataset.section === "videos") {
+                    document
+                      .getElementById("video-gallery")
+                      .scrollIntoView({ behavior: "smooth" });
+                  }
+                }
+                document.addEventListener("DOMContentLoaded", function () {
+                  const donateLink = document.querySelector('[data-section="donate"]');
+                  donateLink.classList.add("active");
+                  donateLink.style.color = "#2563eb";
+                });
+              </script>
+              <style>
+                @media (max-width: 768px) {
+                .nav-link {
+                padding: 0.5rem;
+                font-size: 0.875rem;
+                }
+                .hero-section {
+                padding: 4rem 1rem;
+                }
+                .hero-text {
+                text-align: center;
+                }
+                .prayer-times-grid {
+                grid-template-columns: repeat(2, 1fr);
+                }
+                .program-card {
+                margin-bottom: 1.5rem;
+                }
+                .contact-form {
+                padding: 1.5rem;
+                }
+                }
+                @media (max-width: 640px) {
+                .nav-logo {
+                width: 40px;
+                height: 40px;
+                }
+                .nav-menu {
+                display: none;
+                }
+                .mobile-menu-btn {
+                display: block;
+                }
+                .prayer-times-grid {
+                grid-template-columns: 1fr;
+                }
+                .donation-options {
+                grid-template-columns: 1fr;
+                }
+                .contact-info {
+                padding: 1rem;
+                }
+                }
+                .nav-link.active {
+                position: relative;
+                }
+                .nav-link.active::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: currentColor;
+                }
+              </style>
+              <a
+                href="#"
+                onclick="scrollToPrayerTimes(event)"
+                class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium"
+                >Prayer Times</a
+              >
+  <!------------------------------smoothly scroll to the "prayer times" section--------------------------- -->
+              <script>
+                function scrollToPrayerTimes(e) {
+                  e.preventDefault();
+                  const prayerTimesSection = document.querySelector("#prayer-times");
+                  if (prayerTimesSection) {
+                    prayerTimesSection.scrollIntoView({ behavior: "smooth" });
+                  }
+                }
+              </script>
+              <a
+                href="#programs"
+                onclick="setActiveNav(event, this)"
+                class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium"
+                data-section="programs"
+                >Programs</a
+              >
+              <a
+                href="#video-gallery"
+                onclick="setActiveNav(event, this)"
+                class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium"
+                data-section="videos"
+                >Videos</a
+              >
+              <a
+                href="#"
+                onclick="setActiveNav(event, this)"
+                class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium active"
+                data-section="donate"
+                >Donate</a
+              >
+              <a
+                href="#contact"
+                onclick="setActiveNav(event, this)"
+                class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium"
+                data-section="contact"
+                >Contact</a
+              >
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <button
+              onclick="scrollToDonate()"
+              class="!rounded-button bg-primary text-white px-6 py-2 text-sm font-medium hover:bg-primary/90 transition-colors button-pulse border-2 border-primary font-bold"
+            >
+              Donate Now
+            </button>
+<!---------------------------smoothly scroll to the "donate" section -------------------------------->
+            <script>
+              function scrollToDonate() {
+                const donateSection = document.getElementById("donate-section");
+                donateSection.scrollIntoView({ behavior: "smooth" });
+                // Add highlight animation to donation form
+                const donationForm = document.querySelector("#donate-section form");
+                donationForm.style.transition = "box-shadow 0.5s ease";
+                donationForm.style.boxShadow = "0 0 0 4px rgba(37, 99, 235, 0.3)";
+                // Remove highlight after animation
+                setTimeout(() => {
+                  donationForm.style.boxShadow = "";
+                }, 2000);
+              }
+            </script>
+            <a
+              href="https://www.facebook.com/BMCCMasjid"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-8 h-8 flex items-center justify-center bg-[#1877F2] text-white rounded-full hover:bg-[#1877F2]/90 transition-colors"
+            >
+              <i class="ri-facebook-fill text-xl"></i>
+            </a>
+            <button
+              id="darkModeToggle"
+              class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-gray-900 transition-colors ml-2"
+            >
+              <i class="ri-moon-line text-xl"></i>
+            </button>
+  <!-----------------------------------------toggle dark mode ----------------------------------------------->
+            <script>
+              const darkModeToggle = document.getElementById("darkModeToggle");
+              const icon = darkModeToggle.querySelector("i");
+              let isDarkMode = false;
+              darkModeToggle.addEventListener("click", () => {
+                isDarkMode = !isDarkMode;
+                if (isDarkMode) {
+                  document.body.classList.add("dark-mode");
+                  document.body.style.backgroundColor = "#1a202c";
+                  document.body.style.color = "#ffffff";
+                  icon.classList.remove("ri-moon-line");
+                  icon.classList.add("ri-sun-line");
+                  icon.style.color = "#ffffff";
+                  // Ensure navigation and content remain visible
+                  const nav = document.querySelector("nav");
+                  nav.style.backgroundColor = "#2d3748";
+                  nav.style.color = "#ffffff";
+                  // Update navigation links color
+                  const navLinks = document.querySelectorAll(".nav-link");
+                  navLinks.forEach((link) => {
+                    link.style.color = "#e2e8f0";
+                    link.classList.add("hover:text-primary");
+                  });
+                  // Ensure donate button remains visible
+                  const donateButtons = document.querySelectorAll("button.bg-primary");
+                  donateButtons.forEach((button) => {
+                    if (!button.classList.contains("border-2")) {
+                      button.classList.add("border-2", "border-primary");
+                    }
+                  });
+                  // Ensure sections remain visible
+                  const sections = document.querySelectorAll("section");
+                  sections.forEach((section) => {
+                    if (section.classList.contains("bg-white")) {
+                      section.classList.remove("bg-white");
+                      section.classList.add("bg-gray-800");
+                    }
+                    if (section.classList.contains("bg-gray-50")) {
+                      section.classList.remove("bg-gray-50");
+                      section.classList.add("bg-gray-900");
+                    }
+                  });
+                  // Update text colors for better visibility
+                  const headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+                  headings.forEach((heading) => {
+                    if (!heading.closest(".bg-white")) {
+                      heading.style.color = "#ffffff";
+                    }
+                  });
+                  // Update card backgrounds
+                  const cards = document.querySelectorAll(".bg-white");
+                  cards.forEach((card) => {
+                    if (
+                      !card.closest("section.bg-primary") &&
+                      !card.closest("#donate-section")
+                    ) {
+                      card.classList.remove("bg-white");
+                      card.classList.add("bg-gray-700");
+                      card.style.color = "#ffffff";
+                    }
+                  });
+                  // Ensure donate section remains visible in dark mode
+                  const donateSection = document.getElementById("donate-section");
+                  if (donateSection) {
+                    donateSection.classList.add("dark-mode-donate");
+                    const donateCards = donateSection.querySelectorAll(".bg-white/20");
+                    donateCards.forEach((card) => {
+                      card.classList.add("bg-white/30");
+                    });
+                  }
+                } else {
+                  document.body.classList.remove("dark-mode");
+                  document.body.style.backgroundColor = "";
+                  document.body.style.color = "";
+                  icon.classList.remove("ri-sun-line");
+                  icon.classList.add("ri-moon-line");
+                  icon.style.color = "";
+                  // Reset navigation
+                  const nav = document.querySelector("nav");
+                  nav.style.backgroundColor = "";
+                  nav.style.color = "";
+                  // Reset navigation links
+                  const navLinks = document.querySelectorAll(".nav-link");
+                  navLinks.forEach((link) => {
+                    link.style.color = "";
+                  });
+                  // Keep donate button borders for consistency
+                  const donateButtons = document.querySelectorAll("button.bg-primary");
+                  donateButtons.forEach((button) => {
+                    if (!button.classList.contains("border-2")) {
+                      button.classList.add("border-2", "border-primary");
+                    }
+                  });
+                  // Reset sections
+                  const sections = document.querySelectorAll("section");
+                  sections.forEach((section) => {
+                    if (section.classList.contains("bg-gray-800")) {
+                      section.classList.remove("bg-gray-800");
+                      section.classList.add("bg-white");
+                    }
+                    if (section.classList.contains("bg-gray-900")) {
+                      section.classList.remove("bg-gray-900");
+                      section.classList.add("bg-gray-50");
+                    }
+                  });
+                  // Reset text colors
+                  const headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+                  headings.forEach((heading) => {
+                    heading.style.color = "";
+                  });
+                  // Reset card backgrounds
+                  const cards = document.querySelectorAll(".bg-gray-700");
+                  cards.forEach((card) => {
+                    card.classList.remove("bg-gray-700");
+                    card.classList.add("bg-white");
+                    card.style.color = "";
+                  });
+                  // Reset donate section
+                  const donateSection = document.getElementById("donate-section");
+                  if (donateSection) {
+                    donateSection.classList.remove("dark-mode-donate");
+                  }
+                }
+              });
+            </script>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+        
+    <main class="pt-16">
+      <section class="relative overflow-hidden bg-white py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="animate-slideIn">
+              <h1 class="text-4xl md:text-5xl font-bold gradient-text mb-6">
+                Welcome to BMCC Masjid Dar as-Sunnah
+              </h1>
+              <p
+                class="text-3xl text-primary mb-6"
+                style="font-family: 'Noto Naskh Arabic', serif;"
+              >
+                مسجد دار السنة
+              </p>
+              <p class="text-gray-600 text-lg mb-8">
+                Join our vibrant Muslim community for prayer, education, and
+                spiritual growth. Find peace and guidance in our welcoming
+                mosque.
+              </p>
+              <div class="flex space-x-4">
+                <button
+                  onclick="scrollToPrayerTimes(event)"
+                  class="!rounded-button bg-primary text-white px-8 py-3 font-medium hover:bg-primary/90 transition-colors border-2 border-primary"
+                >
+                  Prayer Times
+                </button>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <img
+                src="images/masjid1.jpg"
+                alt="Mosque Interior"
+                class="w-full h-auto rounded-lg shadow-xl hover-lift animate-scaleIn"
+              />
+              <img
+                src="images/masjid2.jpg"
+                alt="Community"
+                class="w-full h-auto rounded-lg shadow-xl hover-lift animate-scaleIn"
+                style="animation-delay: 0.2s"
+              />
+              <img
+                src="images/masjid3.jpg"
+                alt="Education"
+                class="w-full h-auto rounded-lg shadow-xl hover-lift animate-scaleIn"
+                style="animation-delay: 0.4s"
+              />
+              <img
+                src="images/masjid4.jpg"
+                alt="Architecture"
+                class="w-full h-auto rounded-lg shadow-xl hover-lift animate-scaleIn"
+                style="animation-delay: 0.6s"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+         <!----------------------------PRAYER TIMES ----------------------------->
+      <section id="prayer-times" class="relative py-24 bg-primary/5">
+        <div
+          class="absolute inset-0 bg-[url('https://public.readdy.ai/ai/img_res/ae321258a5faea4a651ca78196c3b953.jpg')] opacity-5 bg-cover bg-center"
+        ></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div class="text-center mb-16 animate-fadeIn">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Prayer Times</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Today's Prayer Schedule - Wednesday, March 26, 2025
+            </p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+              <div
+                class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden border border-gray-100"
+              >
+                <div
+                  class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 divide-x divide-gray-100"
+                >
+                  <div
+                    class="p-6 text-center hover:bg-gray-50 transition-colors"
+                  >
+                    <div class="text-sm text-gray-600 mb-2">Fajr</div>
+                    <div class="text-2xl font-semibold text-gray-900">
+                      5:41 AM
+                    </div>
+                    <div class="text-sm text-primary mt-2">Iqamah 6:00 AM</div>
+                  </div>
+                  <div
+                    class="p-6 text-center hover:bg-gray-50 transition-colors"
+                  >
+                    <div class="text-sm text-gray-600 mb-2">Sunrise</div>
+                    <div class="text-2xl font-semibold text-gray-900">
+                      6:53 AM
+                    </div>
+                    <div class="text-sm text-primary mt-2">&nbsp;</div>
+                  </div>
+                  <div
+                    class="p-6 text-center hover:bg-gray-50 transition-colors"
+                  >
+                    <div class="text-sm text-gray-600 mb-2">Dhuhr</div>
+                    <div class="text-2xl font-semibold text-gray-900">
+                      1:03 PM
+                    </div>
+                    <div class="text-sm text-primary mt-2">Iqamah 1:30 PM</div>
+                  </div>
+                  <div
+                    class="p-6 text-center hover:bg-gray-50 transition-colors"
+                  >
+                    <div class="text-sm text-gray-600 mb-2">Asr</div>
+                    <div class="text-2xl font-semibold text-gray-900">
+                      4:32 PM
+                    </div>
+                    <div class="text-sm text-primary mt-2">Iqamah 4:45 PM</div>
+                  </div>
+                  <div
+                    class="p-6 text-center hover:bg-gray-50 transition-colors"
+                  >
+                    <div class="text-sm text-gray-600 mb-2">Maghrib</div>
+                    <div class="text-2xl font-semibold text-gray-900">
+                      7:13 PM
+                    </div>
+                    <div class="text-sm text-primary mt-2">At Sunset</div>
+                  </div>
+                  <div
+                    class="p-6 text-center hover:bg-gray-50 transition-colors"
+                  >
+                    <div class="text-sm text-gray-600 mb-2">Isha</div>
+                    <div class="text-2xl font-semibold text-gray-900">
+                      8:25 PM
+                    </div>
+                    <div class="text-sm text-primary mt-2">Iqamah 8:45 PM</div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div
+                  class="bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-gray-100"
+                >
+                  <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">
+                      Jumu'ah Prayer
+                    </h3>
+                    <i class="ri-mosque-line text-primary text-xl"></i>
+                  </div>
+                  <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                      <span class="text-gray-600">First Khutbah</span>
+                      <span class="text-gray-900 font-medium">1:15 PM</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-gray-600">Second Khutbah</span>
+                      <span class="text-gray-900 font-medium">2:15 PM</span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-gray-100"
+                >
+                  <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">
+                      Special Programs
+                    </h3>
+                    <i class="ri-calendar-event-line text-primary text-xl"></i>
+                  </div>
+                  <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                      <span class="text-gray-600">Tafseer Class</span>
+                      <span class="text-gray-900 font-medium">Wed 8:00 PM</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-gray-600">Youth Halaqa</span>
+                      <span class="text-gray-900 font-medium">Sat 6:00 PM</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-gray-100"
+            >
+              <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-semibold text-gray-900">
+                  Monthly Calendar
+                </h3>
+                <div class="flex items-center space-x-2">
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"
+                  >
+                    <i class="ri-arrow-left-s-line text-gray-600"></i>
+                  </button>
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"
+                  >
+                    <i class="ri-arrow-right-s-line text-gray-600"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="grid grid-cols-7 gap-2 text-center mb-4">
+                <div class="text-sm text-gray-600">Su</div>
+                <div class="text-sm text-gray-600">Mo</div>
+                <div class="text-sm text-gray-600">Tu</div>
+                <div class="text-sm text-gray-600">We</div>
+                <div class="text-sm text-gray-600">Th</div>
+                <div class="text-sm text-gray-600">Fr</div>
+                <div class="text-sm text-gray-600">Sa</div>
+              </div>
+              <div
+                class="grid grid-cols-7 gap-2 text-center"
+                id="calendar-days"
+              ></div>
+<!-------------------------------------- interactive calendar month navigation.----------------------------------------------->
+              <script>
+                let events = {};
+                function showAddEventModal(date) {
+                  const modal = document.createElement("div");
+                  modal.className =
+                    "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+                  modal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 w-96 animate-scaleIn">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Add Event</h3>
+                <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-medium mb-2">Event Title</label>
+                <input type="text" id="eventTitle" class="w-full px-4 py-2 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                </div>
+                <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-medium mb-2">Event Type</label>
+                <select id="eventType" class="w-full px-4 py-2 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                <option value="islamic">Islamic Event</option>
+                <option value="community">Community Program</option>
+                </select>
+                </div>
+                <div class="flex justify-end space-x-3">
+                <button onclick="this.parentElement.parentElement.parentElement.remove()" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-button">Cancel</button>
+                <button onclick="addEvent('${date}')" class="px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90">Add Event</button>
+                </div>
+                </div>
+                `;
+                  document.body.appendChild(modal);
+                }
+                function addEvent(dateStr) {
+                  const title = document.getElementById("eventTitle").value;
+                  const type = document.getElementById("eventType").value;
+                  if (!title) return;
+                  if (!events[dateStr]) {
+                    events[dateStr] = [];
+                  }
+                  events[dateStr].push({ title, type });
+                  document.querySelector(".fixed.inset-0").remove();
+                  renderCalendar();
+                }
+                function renderCalendar() {
+                  const today = new Date();
+                  const currentMonth = today.getMonth();
+                  const currentYear = today.getFullYear();
+                  const firstDay = new Date(currentYear, currentMonth, 1);
+                  const lastDay = new Date(currentYear, currentMonth + 1, 0);
+                  const startingDay = firstDay.getDay();
+                  const totalDays = lastDay.getDate();
+                  const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
+                  const calendarContainer = document.getElementById("calendar-days");
+                  calendarContainer.innerHTML = "";
+                  // Previous month days
+                  for (let i = startingDay - 1; i >= 0; i--) {
+                    const dayElement = document.createElement("div");
+                    dayElement.className =
+                      "p-2 text-gray-400 cursor-pointer hover:bg-gray-50 rounded-lg transition-colors";
+                    dayElement.textContent = prevMonthLastDay - i;
+                    calendarContainer.appendChild(dayElement);
+                  }
+                  // Current month days
+                  for (let i = 1; i <= totalDays; i++) {
+                    const dayElement = document.createElement("div");
+                    const dateStr = `${currentYear}-${(currentMonth + 1).toString().padStart(2, "0")}-${i.toString().padStart(2, "0")}`;
+                    if (i === today.getDate()) {
+                      dayElement.className =
+                        "p-2 bg-primary text-white rounded-full cursor-pointer hover:bg-primary/90 transition-colors";
+                    } else {
+                      dayElement.className =
+                        "p-2 cursor-pointer hover:bg-gray-50 rounded-lg transition-colors";
+                    }
+                    dayElement.textContent = i;
+                    dayElement.onclick = () => showAddEventModal(dateStr);
+                    // Add event indicators
+                    if (events[dateStr]) {
+                      events[dateStr].forEach((event) => {
+                        const indicator = document.createElement("div");
+                        indicator.className = `w-1.5 h-1.5 ${event.type === "islamic" ? "bg-green-500" : "bg-yellow-500"} rounded-full mx-auto mt-1`;
+                        indicator.title = event.title;
+                        dayElement.appendChild(indicator);
+                      });
+                    }
+                    // Add default special event indicators
+                    if (i === 5 || i === 15) {
+                      const indicator = document.createElement("div");
+                      indicator.className =
+                        "w-1.5 h-1.5 bg-green-500 rounded-full mx-auto mt-1";
+                      dayElement.appendChild(indicator);
+                    }
+                    if (i === 10 || i === 20) {
+                      const indicator = document.createElement("div");
+                      indicator.className =
+                        "w-1.5 h-1.5 bg-yellow-500 rounded-full mx-auto mt-1";
+                      dayElement.appendChild(indicator);
+                    }
+                    calendarContainer.appendChild(dayElement);
+                  }
+                  // Next month days
+                  const remainingDays = 42 - (startingDay + totalDays);
+                  for (let i = 1; i <= remainingDays; i++) {
+                    const dayElement = document.createElement("div");
+                    dayElement.className =
+                      "p-2 text-gray-400 cursor-pointer hover:bg-gray-50 rounded-lg transition-colors";
+                    dayElement.textContent = i;
+                    calendarContainer.appendChild(dayElement);
+                  }
+                }
+                renderCalendar();
+                // Add event listeners for month navigation
+                document
+                  .querySelector(".ri-arrow-left-s-line")
+                  .parentElement.addEventListener("click", () => {
+                    const currentDate = new Date();
+                    currentDate.setMonth(currentDate.getMonth() - 1);
+                    renderCalendar(currentDate);
+                  });
+                document
+                  .querySelector(".ri-arrow-right-s-line")
+                  .parentElement.addEventListener("click", () => {
+                    const currentDate = new Date();
+                    currentDate.setMonth(currentDate.getMonth() + 1);
+                    renderCalendar(currentDate);
+                  });
+              </script>
+            </div>
+          </div>
+        </div>
+      </section>
+
+         <!----------------------------PROGRAMS----------------------------->
+      <section class="bg-white py-24" id="programs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div class="text-center mb-16 animate-fadeIn">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Programs</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Join our educational and spiritual programs designed to strengthen
+              faith and build community.
+            </p>
+          </div>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-16"
+          >
+            <div
+              class="bg-white rounded-lg shadow-lg overflow-hidden hover-lift card-hover"
+            >
+              <div class="h-48 overflow-hidden">
+                <img
+                  src="https://public.readdy.ai/ai/img_res/2d64dfc9f1a9b33d5598ae4f3b5b0578.jpg"
+                  alt="Quran Studies"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  The Qur'an & Islamic Studies
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Join us in reciting the Qur'an together in a spiritual and
+                  uplifting gathering. Learn Tajweed rules and deepen your
+                  understanding of Islamic teachings.
+                </p>
+                <div class="space-y-2">
+                  <div class="flex items-center text-gray-600">
+                    <i class="ri-time-line mr-2"></i>
+                    <span>Saturday from 10 AM to 1 PM</span>
+                  </div>
+                  <div class="flex items-center text-gray-600">
+                    <i class="ri-money-dollar-circle-line mr-2"></i>
+                    <span>$60 per month</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white rounded-lg shadow-lg overflow-hidden hover-lift card-hover"
+            >
+              <div class="h-48 overflow-hidden">
+                <img
+                  src="https://public.readdy.ai/ai/img_res/f39e43774a1e42acbce7b0828411bdeb.jpg"
+                  alt="Arabic Lessons"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Arabic Language Lessons
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Enroll in our comprehensive Arabic language program to better
+                  understand the language of the Qur'an. Perfect for beginners
+                  to advanced learners.
+                </p>
+                <div class="space-y-2">
+                  <div class="flex items-center text-gray-600">
+                    <i class="ri-time-line mr-2"></i>
+                    <span>Saturday from 10 AM to 1 PM</span>
+                  </div>
+                  <div class="flex items-center text-gray-600">
+                    <i class="ri-money-dollar-circle-line mr-2"></i>
+                    <span>$60 per month</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white rounded-lg shadow-lg overflow-hidden hover-lift card-hover"
+            >
+              <div class="h-48 overflow-hidden">
+                <img
+                  src="images/flyer karate.png"
+                  alt="Karate Lessons"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Karate Lessons
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Improve your strength, discipline, and focus with our karate
+                  classes for all ages.
+                </p>
+                <div class="space-y-2">
+                  <div class="flex items-center text-gray-600">
+                    <i class="ri-time-line mr-2"></i>
+                    <span>Saturday 1:30 PM - 2:30 PM</span>
+                  </div>
+                  <div class="flex items-center text-gray-600">
+                    <i class="ri-time-line mr-2"></i>
+                    <span>Sunday 10:30 AM - 11:30 AM</span>
+                  </div>
+                  <div class="flex items-center text-gray-600">
+                    <i class="ri-money-dollar-circle-line mr-2"></i>
+                    <span>$65 per month</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <section id="video-gallery" class="mb-16">
+            <div class="text-center mb-10 animate-fadeIn">
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                Video Gallery
+              </h2>
+              <p class="text-gray-600 max-w-2xl mx-auto">
+                Watch our latest lectures, events, and community activities
+              </p>
+            </div>
+            <div class="relative">
+              <div class="overflow-hidden">
+                <div
+                  id="videoSlider"
+                  class="flex transition-transform duration-500 ease-in-out"
+                >
+                  <div class="min-w-full md:min-w-[50%] px-2">
+                    <div
+                      class="bg-white rounded-lg shadow-lg overflow-hidden hover-lift h-full"
+                    >
+                      <div class="relative aspect-video">
+                        <div
+                          class="absolute inset-0 bg-gray-900/10 flex items-center justify-center cursor-pointer"
+                          onclick="playVideo('video1')"
+                        >
+                          <div
+                            class="w-16 h-16 bg-primary/90 rounded-full flex items-center justify-center"
+                          >
+                            <i class="ri-play-fill text-white text-2xl"></i>
+                          </div>
+                        </div>
+                        <img
+                          src="https://public.readdy.ai/ai/img_res/baa6e195f0ecf31037fe26405013f08c.jpg"
+                          alt="Friday Sermon"
+                          class="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                          Friday Sermon: The Importance of Community
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                          Sheikh Abdullah discusses the significance of building
+                          strong community bonds in Islam.
+                        </p>
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center text-gray-600">
+                            <i class="ri-time-line mr-2"></i>
+                            <span>March 22, 2025</span>
+                          </div>
+                          <div class="flex items-center text-gray-600">
+                            <i class="ri-eye-line mr-2"></i>
+                            <span>1,245 views</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="min-w-full md:min-w-[50%] px-2">
+                    <div
+                      class="bg-white rounded-lg shadow-lg overflow-hidden hover-lift h-full"
+                    >
+                      <div class="relative aspect-video">
+                        <div
+                          class="absolute inset-0 bg-gray-900/10 flex items-center justify-center cursor-pointer"
+                          onclick="playVideo('video2')"
+                        >
+                          <div
+                            class="w-16 h-16 bg-primary/90 rounded-full flex items-center justify-center"
+                          >
+                            <i class="ri-play-fill text-white text-2xl"></i>
+                          </div>
+                        </div>
+                        <img
+                          src="https://public.readdy.ai/ai/img_res/9ee25e08cf240b77e6474f597cbbc790.jpg"
+                          alt="Quran Workshop"
+                          class="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                          Quran Workshop: Tajweed Fundamentals
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                          Learn the basics of Tajweed with our experienced
+                          instructor Ustadh Ibrahim.
+                        </p>
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center text-gray-600">
+                            <i class="ri-time-line mr-2"></i>
+                            <span>March 15, 2025</span>
+                          </div>
+                          <div class="flex items-center text-gray-600">
+                            <i class="ri-eye-line mr-2"></i>
+                            <span>987 views</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="min-w-full md:min-w-[50%] px-2">
+                    <div
+                      class="bg-white rounded-lg shadow-lg overflow-hidden hover-lift h-full"
+                    >
+                      <div class="relative aspect-video">
+                        <div
+                          class="absolute inset-0 bg-gray-900/10 flex items-center justify-center cursor-pointer"
+                          onclick="playVideo('video3')"
+                        >
+                          <div
+                            class="w-16 h-16 bg-primary/90 rounded-full flex items-center justify-center"
+                          >
+                            <i class="ri-play-fill text-white text-2xl"></i>
+                          </div>
+                        </div>
+                        <img
+                          src="https://public.readdy.ai/ai/img_res/a6e5c6219949c182c108eeda981ccae3.jpg"
+                          alt="Charity Event"
+                          class="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                          Community Service: Ramadan Food Drive
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                          Our community comes together to provide food packages
+                          for those in need during Ramadan.
+                        </p>
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center text-gray-600">
+                            <i class="ri-time-line mr-2"></i>
+                            <span>March 10, 2025</span>
+                          </div>
+                          <div class="flex items-center text-gray-600">
+                            <i class="ri-eye-line mr-2"></i>
+                            <span>856 views</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="min-w-full md:min-w-[50%] px-2">
+                    <div
+                      class="bg-white rounded-lg shadow-lg overflow-hidden hover-lift h-full"
+                    >
+                      <div class="relative aspect-video">
+                        <div
+                          class="absolute inset-0 bg-gray-900/10 flex items-center justify-center cursor-pointer"
+                          onclick="playVideo('video4')"
+                        >
+                          <div
+                            class="w-16 h-16 bg-primary/90 rounded-full flex items-center justify-center"
+                          >
+                            <i class="ri-play-fill text-white text-2xl"></i>
+                          </div>
+                        </div>
+                        <img
+                          src="https://public.readdy.ai/ai/img_res/a687feceadc89a9777668c260b2601e2.jpg"
+                          alt="Youth Program"
+                          class="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                          Youth Program: Building Future Leaders
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                          Our youth development program focuses on Islamic
+                          values and leadership skills.
+                        </p>
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center text-gray-600">
+                            <i class="ri-time-line mr-2"></i>
+                            <span>March 5, 2025</span>
+                          </div>
+                          <div class="flex items-center text-gray-600">
+                            <i class="ri-eye-line mr-2"></i>
+                            <span>723 views</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="min-w-full md:min-w-[50%] px-2">
+                    <div
+                      class="bg-white rounded-lg shadow-lg overflow-hidden hover-lift h-full"
+                    >
+                      <div class="relative aspect-video">
+                        <div
+                          class="absolute inset-0 bg-gray-900/10 flex items-center justify-center cursor-pointer"
+                          onclick="playVideo('video5')"
+                        >
+                          <div
+                            class="w-16 h-16 bg-primary/90 rounded-full flex items-center justify-center"
+                          >
+                            <i class="ri-play-fill text-white text-2xl"></i>
+                          </div>
+                        </div>
+                        <img
+                          src="https://public.readdy.ai/ai/img_res/4a2cddab424af5cd2792f24a3d0b5010.jpg"
+                          alt="Quran Tafseer"
+                          class="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                          Quran Tafseer: Understanding Surah Al-Baqarah
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                          Sheikh Mohammed provides detailed explanation of key
+                          verses from Surah Al-Baqarah.
+                        </p>
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center text-gray-600">
+                            <i class="ri-time-line mr-2"></i>
+                            <span>February 28, 2025</span>
+                          </div>
+                          <div class="flex items-center text-gray-600">
+                            <i class="ri-eye-line mr-2"></i>
+                            <span>1,102 views</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button
+                id="prevVideo"
+                class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-primary w-10 h-10 rounded-full shadow-lg flex items-center justify-center z-10"
+              >
+                <i class="ri-arrow-left-s-line text-xl"></i>
+              </button>
+              <button
+                id="nextVideo"
+                class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-primary w-10 h-10 rounded-full shadow-lg flex items-center justify-center z-10"
+              >
+                <i class="ri-arrow-right-s-line text-xl"></i>
+              </button>
+              <div
+                class="flex justify-center mt-6 space-x-2"
+                id="videoIndicators"
+              >
+                <button
+                  class="w-3 h-3 rounded-full bg-primary"
+                  data-index="0"
+                ></button>
+                <button
+                  class="w-3 h-3 rounded-full bg-gray-300"
+                  data-index="1"
+                ></button>
+                <button
+                  class="w-3 h-3 rounded-full bg-gray-300"
+                  data-index="2"
+                ></button>
+              </div>
+            </div>
+            <div
+              id="videoModal"
+              class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden"
+            >
+              <div class="relative w-full max-w-4xl mx-4">
+                <button
+                  onclick="closeVideoModal()"
+                  class="absolute -top-10 right-0 text-white hover:text-gray-300"
+                >
+                  <i class="ri-close-line text-3xl"></i>
+                </button>
+                <div class="bg-black rounded-lg overflow-hidden">
+                  <div id="videoContainer" class="aspect-video w-full"></div>
+                </div>
+              </div>
+            </div>
+<!------------------------------------------------Videos----------------------------------------->
+            <script>
+              const videoSources = {
+                video1: {
+                  title: "Friday Sermon: The Importance of Community",
+                  src: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+                },
+                video2: {
+                  title: "Quran Workshop: Tajweed Fundamentals",
+                  src: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+                },
+                video3: {
+                  title: "Community Service: Ramadan Food Drive",
+                  src: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+                },
+                video4: {
+                  title: "Youth Program: Building Future Leaders",
+                  src: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+                },
+                video5: {
+                  title: "Quran Tafseer: Understanding Surah Al-Baqarah",
+                  src: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+                },
+              };
+              let currentSlide = 0;
+              const slidesPerView = window.innerWidth >= 768 ? 2 : 1;
+              const totalSlides = document.querySelectorAll("#videoSlider > div").length;
+              const maxSlide = Math.ceil(totalSlides / slidesPerView) - 1;
+              function updateSlider() {
+                const slider = document.getElementById("videoSlider");
+                const slideWidth = 100 / slidesPerView;
+                slider.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+
+                // Update indicators
+                const indicators = document.querySelectorAll("#videoIndicators button");
+                indicators.forEach((indicator, index) => {
+                  if (index === currentSlide) {
+                    indicator.classList.remove("bg-gray-300");
+                    indicator.classList.add("bg-primary");
+                  } else {
+                    indicator.classList.remove("bg-primary");
+                    indicator.classList.add("bg-gray-300");
+                  }
+                });
+              }
+              function nextSlide() {
+                if (currentSlide < maxSlide) {
+                  currentSlide++;
+                  updateSlider();
+                }
+              }
+              function prevSlide() {
+                if (currentSlide > 0) {
+                  currentSlide--;
+                  updateSlider();
+                }
+              }
+              // Set up indicators based on number of slides
+              function setupIndicators() {
+                const indicatorsContainer = document.getElementById("videoIndicators");
+                indicatorsContainer.innerHTML = "";
+
+                for (let i = 0; i <= maxSlide; i++) {
+                  const indicator = document.createElement("button");
+                  indicator.className = `w-3 h-3 rounded-full ${i === 0 ? "bg-primary" : "bg-gray-300"}`;
+                  indicator.dataset.index = i;
+                  indicator.addEventListener("click", () => {
+                    currentSlide = i;
+                    updateSlider();
+                  });
+                  indicatorsContainer.appendChild(indicator);
+                }
+              }
+              document.getElementById("nextVideo").addEventListener("click", nextSlide);
+              document.getElementById("prevVideo").addEventListener("click", prevSlide);
+              // Auto slide every 5 seconds
+              let slideInterval = setInterval(nextSlide, 5000);
+              // Pause auto slide on hover
+              const sliderContainer = document.querySelector("#videoSlider").parentElement;
+              sliderContainer.addEventListener("mouseenter", () => {
+                clearInterval(slideInterval);
+              });
+              sliderContainer.addEventListener("mouseleave", () => {
+                slideInterval = setInterval(nextSlide, 5000);
+              });
+              // Handle window resize
+              window.addEventListener("resize", () => {
+                const newSlidesPerView = window.innerWidth >= 768 ? 2 : 1;
+                if (newSlidesPerView !== slidesPerView) {
+                  location.reload(); // Simplest way to handle the layout change
+                }
+              });
+              function playVideo(videoId) {
+                const modal = document.getElementById("videoModal");
+                const container = document.getElementById("videoContainer");
+                const videoData = videoSources[videoId];
+                container.innerHTML = `<iframe src="${videoData.src}" title="${videoData.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>`;
+                modal.classList.remove("hidden");
+                document.body.style.overflow = "hidden";
+                clearInterval(slideInterval); // Pause auto slide when video is playing
+              }
+              function closeVideoModal() {
+                const modal = document.getElementById("videoModal");
+                const container = document.getElementById("videoContainer");
+                container.innerHTML = "";
+                modal.classList.add("hidden");
+                document.body.style.overflow = "";
+                slideInterval = setInterval(nextSlide, 5000); // Resume auto slide
+              }
+              // Close modal when clicking outside the video
+              document.getElementById("videoModal").addEventListener("click", function (e) {
+                if (e.target === this) {
+                  closeVideoModal();
+                }
+              });
+              // Initialize indicators
+              setupIndicators();
+            </script>
+            <div class="text-center mt-8">
+              <button
+                onclick="scrollToVideos()"
+                class="!rounded-button bg-primary text-white px-6 py-2 text-sm font-medium hover:bg-primary/90 transition-colors border-2 border-primary"
+              >
+                View More Videos
+              </button>
+            </div>
+  <!-------------------------------smoothly scroll to video gallery section ------------------------------->
+            <script>
+              function scrollToVideos() {
+                const videoSection = document.getElementById("video-gallery");
+                videoSection.scrollIntoView({ behavior: "smooth" });
+                // Show a notification
+                const notification = document.createElement("div");
+                notification.className =
+                  "fixed bottom-4 right-4 bg-primary text-white px-6 py-3 rounded-lg shadow-lg animate-scaleIn z-50";
+                notification.innerHTML = `
+              <div class="flex items-center">
+              <i class="ri-information-line mr-2"></i>
+              <span>More videos coming soon!</span>
+              </div>
+              `;
+                document.body.appendChild(notification);
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                  notification.classList.add("animate-fadeOut");
+                  setTimeout(() => {
+                    notification.remove();
+                  }, 500);
+                }, 3000);
+              }
+            </script>
+            <style>
+              .animate-fadeOut {
+              animation: fadeOut 0.5s ease-in-out forwards;
+              }
+              @keyframes fadeOut {
+              from { opacity: 1; }
+              to { opacity: 0; }
+              }
+              .aspect-video {
+              aspect-ratio: 16 / 9;
+              }
+            </style>
+          </section>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="animate-slideIn">
+              <img
+                src="https://public.readdy.ai/ai/img_res/9f8454eda7f08c3b8580edb99de88b32.jpg"
+                alt="About Image"
+                class="w-full h-auto rounded-lg shadow-xl hover-lift"
+              />
+            </div>
+            <div class="animate-fadeIn">
+              <h2 class="text-3xl font-bold text-gray-900 mb-6">
+                Our Community Values
+              </h2>
+              <div class="space-y-6">
+                <div class="flex items-start space-x-4">
+                  <div
+                    class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
+                  >
+                    <i class="ri-heart-line text-primary"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                      Inclusive Community
+                    </h3>
+                    <p class="text-gray-600">
+                      A welcoming space for Muslims from all backgrounds to
+                      worship and connect.
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                  <div
+                    class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
+                  >
+                    <i class="ri-book-open-line text-primary"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                      Islamic Education
+                    </h3>
+                    <p class="text-gray-600">
+                      Comprehensive Islamic education programs for children and
+                      adults.
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                  <div
+                    class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
+                  >
+                    <i class="ri-hand-heart-line text-primary"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                      Community Support
+                    </h3>
+                    <p class="text-gray-600">
+                      Dedicated support services and charitable activities.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+          <!----------------------------DONATION SECTION----------------------------->
+      <section
+        id="donate-section"
+        class="bg-gradient-to-r from-primary to-blue-700 py-24 relative overflow-hidden">
+        <div
+          class="absolute inset-0 bg-[url('https://public.readdy.ai/ai/img_res/869c7059b80e6548e10202f005c38818.jpg')] opacity-10 bg-cover bg-center"
+        ></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div class="text-center mb-16 animate-fadeIn">
+            <h2 class="text-3xl font-bold text-white mb-4">
+              Support Our Mosque - Donate Now
+            </h2>
+            <p class="text-white/80 max-w-2xl mx-auto">
+              Your generous donations help us maintain our services and support
+              our community programs.
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div class="space-y-8 animate-slideIn">
+              <div
+                class="bg-white/20 backdrop-blur-sm rounded-lg p-6 hover-lift"
+              >
+                <div class="flex items-center space-x-4">
+                  <div
+                    class="w-12 h-12 bg-white/30 rounded-full flex items-center justify-center"
+                  >
+                    <i class="ri-building-2-line text-white text-2xl"></i>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-white text-lg font-semibold mb-1">
+                      Mosque Maintenance
+                    </h3>
+                    <p class="text-white/90">
+                      Support facility upkeep and improvements
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white/20 backdrop-blur-sm rounded-lg p-6 hover-lift"
+              >
+                <div class="flex items-center space-x-4">
+                  <div
+                    class="w-12 h-12 bg-white/30 rounded-full flex items-center justify-center"
+                  >
+                    <i class="ri-book-open-line text-white text-2xl"></i>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-white text-lg font-semibold mb-1">
+                      Educational Programs
+                    </h3>
+                    <p class="text-white/90">
+                      Fund Islamic education initiatives
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white/20 backdrop-blur-sm rounded-lg p-6 hover-lift"
+              >
+                <div class="flex items-center space-x-4">
+                  <div
+                    class="w-12 h-12 bg-white/30 rounded-full flex items-center justify-center"
+                  >
+                    <i class="ri-hand-heart-line text-white text-2xl"></i>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-white text-lg font-semibold mb-1">
+                      Community Support
+                    </h3>
+                    <p class="text-white/90">
+                      Help those in need in our community
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="animate-fadeIn">
+              <form class="bg-white p-8 rounded-lg shadow-xl">
+                <div class="mb-6">
+                  <label class="block text-gray-700 text-sm font-medium mb-2"
+                    >Select Amount</label
+                  >
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+
+                    <button
+                      type="button"
+                      onclick="setAmount(50)"
+                      class="!rounded-button border-2 border-primary text-primary px-4 py-2 hover:bg-primary hover:text-white active:bg-primary active:text-white focus:bg-primary focus:text-white transition-colors"
+                      > $50
+                    </button>
+
+                    <button
+                      type="button"
+                      onclick="setAmount(100)"
+                      class="!rounded-button border-2 border-primary text-primary px-4 py-2 hover:bg-primary hover:text-white active:bg-primary active:text-white focus:bg-primary focus:text-white transition-colors"
+                    >
+                      $100
+                    </button>
+                    <button
+                      type="button"
+                      onclick="setAmount(200)"
+                      class="!rounded-button border-2 border-primary text-primary px-4 py-2 hover:bg-primary hover:text-white active:bg-primary active:text-white focus:bg-primary focus:text-white transition-colors"
+                    >
+                      $200
+                    </button>
+                  </div>
+                  <input
+                    type="number"
+                    id="customAmount"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary input-focus"
+                    placeholder="Enter custom amount"
+                  />
+                </div>
+                <div class="mb-6">
+                  <label class="block text-gray-700 text-sm font-medium mb-2"
+                    >Donation Type</label
+                  >
+                  <select
+                    class="w-full px-4 py-2 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary input-focus"
+                  >
+                    <option>One-time Donation</option>
+                    <option>Monthly Donation</option>
+                    <option>Annual Donation</option>
+                  </select>
+                </div>
+                <div class="mb-6">
+                  <label class="block text-gray-700 text-sm font-medium mb-2"
+                    >Email Address</label
+                  >
+                  <input
+                    type="email"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary input-focus"
+                    placeholder="Enter your email"
+                  />
+                </div>
+                <div class="mb-6">
+                  <label class="block text-gray-700 text-sm font-medium mb-2"
+                    >Payment Method</label
+                  >
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div
+                      class="border border-gray-200 rounded-lg p-4 hover:border-primary transition-colors cursor-pointer"
+                      onclick="showQRCode('paypal')"
+                    >
+                      <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center">
+                          <i
+                            class="ri-paypal-fill text-[#00457C] text-2xl mr-2"
+                          ></i>
+                          <span class="font-medium text-gray-900">PayPal</span>
+                        </div>
+                        <i class="ri-qr-code-line text-gray-400"></i>
+                      </div>
+                      <p class="text-sm text-gray-500">
+                        Scan QR code to pay with PayPal
+                      </p>
+                    </div>
+                    <div
+                      class="border border-gray-200 rounded-lg p-4 hover:border-primary transition-colors cursor-pointer"
+                      onclick="showQRCode('zelle')"
+                    >
+                      <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center">
+                          <i
+                            class="ri-bank-fill text-[#6B1AF1] text-2xl mr-2"
+                          ></i>
+                          <span class="font-medium text-gray-900">Zelle</span>
+                        </div>
+                        <i class="ri-qr-code-line text-gray-400"></i>
+                      </div>
+                      <p class="text-sm text-gray-500">
+                        Scan QR code to pay with Zelle
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="qrCodeModal"
+                  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+                >
+                  <div class="bg-white rounded-lg p-6 w-80 animate-scaleIn">
+                    <div class="flex justify-between items-center mb-4">
+                      <h3
+                        class="text-lg font-semibold text-gray-900"
+                        id="qrCodeTitle"
+                      ></h3>
+                      <button
+                        onclick="hideQRCode()"
+                        class="text-gray-400 hover:text-gray-600"
+                      >
+                        <i class="ri-close-line text-xl"></i>
+                      </button>
+                    </div>
+                    <div class="flex flex-col items-center">
+                      <div
+                        class="w-36 h-36 sm:w-48 sm:h-48 bg-gray-100 rounded-lg mb-4 flex items-center justify-center"
+                        id="qrCodeImage"
+                      >
+                        <i class="ri-qr-code-line text-6xl text-gray-300"></i>
+                      </div>
+                      <p class="text-sm text-gray-500 text-center">
+                        Scan this QR code to complete your payment
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <script>
+                  function showQRCode(type) {
+                    const modal = document.getElementById("qrCodeModal");
+                    const title = document.getElementById("qrCodeTitle");
+                    const qrImage = document.getElementById("qrCodeImage");
+                    if (type === "paypal") {
+                      title.textContent = "PayPal QR Code";
+                      qrImage.innerHTML =
+                        '<img src="https://public.readdy.ai/ai/img_res/19e9de4a7fe074f6fd6a8b2e0dc30872.jpg" class="w-full h-full object-contain" alt="PayPal QR Code">';
+                    } else {
+                      title.textContent = "Zelle QR Code";
+                      qrImage.innerHTML =
+                        '<img src="https://public.readdy.ai/ai/img_res/7009b9b040189fc02a47532f167d06e7.jpg" class="w-full h-full object-contain" alt="Zelle QR Code">';
+                    }
+                    modal.classList.remove("hidden");
+                  }
+                  function hideQRCode() {
+                    const modal = document.getElementById("qrCodeModal");
+                    modal.classList.add("hidden");
+                  }
+                </script>
+                <button
+                  type="submit"
+                  class="w-full !rounded-button bg-primary text-white px-6 py-3 font-medium hover:bg-primary/90 transition-colors border-2 border-primary text-lg"
+                >
+                  Donate Now
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          function setAmount(amount) {
+            document.getElementById("customAmount").value = amount;
+            // Remove active class from all buttons
+            document.querySelectorAll('[onclick^="setAmount"]').forEach((btn) => {
+              btn.classList.remove("bg-primary", "text-white");
+            });
+            // Add active class to clicked button
+            event.target.classList.add("bg-primary", "text-white");
+          }
+        </script>
+      </section>
+
+    </main>
+          <!----------------------------CONTACTS----------------------------->
+    <section class="bg-white py-24" id="contact">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 animate-fadeIn">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Contact Us</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            We would love to hear from you! Please reach out to us for any
+            inquiries.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div
+            class="bg-sky-50 rounded-lg shadow-xl p-8 animate-slideIn max-w-md"
+          >
+            <h3 class="text-2xl font-semibold text-gray-900 mb-6">
+              Get In Touch
+            </h3>
+            <form
+              class="space-y-6"
+              id="contactForm"
+              onsubmit="handleSubmit(event)"
+            >
+              <div>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Your Name"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary input-focus"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Your Email"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary input-focus"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  id="subject"
+                  placeholder="Subject"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary input-focus"
+                  required
+                />
+              </div>
+              <div>
+                <textarea
+                  id="message"
+                  rows="4"
+                  placeholder="Your Message"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary input-focus"
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                id="submitBtn"
+                class="w-full !rounded-button bg-primary text-white px-6 py-3 font-medium hover:bg-primary/90 transition-colors relative border-2 border-primary"
+              >
+                <span>Send Message</span>
+              </button>
+            </form>
+          </div>
+          <div
+            id="successModal"
+            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+          >
+            <div class="bg-white rounded-lg p-6 w-96 animate-scaleIn">
+              <div class="flex items-center justify-center mb-4">
+                <div
+                  class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center"
+                >
+                  <i class="ri-check-line text-2xl text-green-500"></i>
+                </div>
+              </div>
+              <h3 class="text-xl font-semibold text-center text-gray-900 mb-2">
+                Message Sent Successfully!
+              </h3>
+              <p class="text-gray-600 text-center mb-6">
+                Thank you for contacting us. We'll get back to you soon.
+              </p>
+              <button
+                onclick="closeSuccessModal()"
+                class="w-full !rounded-button bg-primary text-white px-6 py-3 font-medium hover:bg-primary/90 transition-colors border-2 border-primary"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+          <script>
+            function handleSubmit(event) {
+              event.preventDefault();
+              const submitBtn = document.getElementById("submitBtn");
+              const btnText = submitBtn.querySelector("span");
+              const originalText = btnText.textContent;
+              // Show loading state
+              btnText.innerHTML =
+                '<i class="ri-loader-4-line animate-spin"></i> Sending...';
+              submitBtn.disabled = true;
+              // Simulate form submission
+              setTimeout(() => {
+                const form = document.getElementById("contactForm");
+                const successModal = document.getElementById("successModal");
+                // Reset form and button
+                form.reset();
+                btnText.textContent = originalText;
+                submitBtn.disabled = false;
+                // Show success modal
+                successModal.classList.remove("hidden");
+              }, 1500);
+            }
+            function closeSuccessModal() {
+              const successModal = document.getElementById("successModal");
+              successModal.classList.add("hidden");
+            }
+          </script>
+          <div class="space-y-8 animate-fadeIn">
+            <div class="bg-primary/5 rounded-lg p-8 hover-lift">
+              <div class="flex items-start space-x-4">
+                <div
+                  class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="ri-map-pin-line text-primary text-2xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-gray-900 mb-2">
+                    Visit Us
+                  </h4>
+                  <p class="text-gray-600">
+                    <strong>BMCC Masjid Dar as-Sunnah</strong><br />234 Bay
+                    Ridge Ave, Brooklyn, NY, 11220
+                  </p>
+                </div>
+              </div>
+              <div class="mt-4 rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6055.433111730053!2d-74.03019712366391!3d40.63613247140521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c245565adaaaab%3A0xb3df095b47aa7f20!2s234%20Bay%20Ridge%20Ave%2C%20Brooklyn%2C%20NY%2011220!5e0!3m2!1sen!2sus!4v1742392007425!5m2!1sen!2sus"
+                  class="w-full h-[400px] rounded-lg"
+                  style="border:0;"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+            <div class="bg-primary/5 rounded-lg p-8 hover-lift">
+              <div class="flex items-start space-x-4">
+                <div
+                  class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="ri-phone-line text-primary text-2xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-gray-900 mb-2">
+                    Call Us
+                  </h4>
+                  <p class="text-gray-600">347-793-8249</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-primary/5 rounded-lg p-8 hover-lift">
+              <div class="flex items-start space-x-4">
+                <div
+                  class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="ri-mail-line text-primary text-2xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-gray-900 mb-2">
+                    Email Us
+                  </h4>
+                  <p class="text-gray-600">
+                    <a
+                      href="mailto:BMCC234@gmail.com"
+                      class="hover:text-primary transition-colors"
+                      >BMCC234@gmail.com</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+          <!------------------------------Footer--------------------------------->
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center text-gray-400">
+          <p>&copy; 2025 Masjid Dar As-sunnah All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    
+  </body>
+</html>
